@@ -1,8 +1,6 @@
 import React from "react";
 
-function NewPlantForm({ formData, setFormData }) {
-  const {name, image, price} = formData;
-
+function NewPlantForm({ formData, setFormData, updatedArray }) {
   function formOnChange(event) {
     setFormData({
       ...formData,
@@ -10,14 +8,24 @@ function NewPlantForm({ formData, setFormData }) {
     })
   }
 
+  console.log(formData)
+
   function formOnSubmit(event) {
     event.preventDefault();
 
     const newPlant = {
-      name: event.name,
-      image: event.image,
-      price: event.price,
+      name: event.target.name.value,
+      image: event.target.image.value,
+      price: event.target.price.value,
     }
+
+    updatedArray(newPlant);
+
+    setFormData({
+      "name": "",
+      "image": "",
+      "price": "",
+    })
 
 
   }
@@ -26,11 +34,11 @@ function NewPlantForm({ formData, setFormData }) {
   return (
     <div className="new-plant-form">
       <h2>New Plant</h2>
-      <form>
-        <input type="text" name="name" placeholder="Plant name" value={name} onChange={formOnChange} />
-        <input type="text" name="image" placeholder="Image URL" value={image} onChange={formOnChange} />
-        <input type="number" name="price" step="0.01" placeholder="Price" value={price} onChange={formOnChange} />
-        <button type="submit" onClick={formOnSubmit}>Add Plant</button>
+      <form onSubmit={formOnSubmit}>
+        <input type="text" name="name" placeholder="Plant name" value={formData.name} onChange={formOnChange} />
+        <input type="text" name="image" placeholder="Image URL" value={formData.image} onChange={formOnChange} />
+        <input type="number" name="price" step="0.01" placeholder="Price" value={formData.price} onChange={formOnChange} />
+        <button type="submit">Add Plant</button>
       </form>
     </div>
   );
