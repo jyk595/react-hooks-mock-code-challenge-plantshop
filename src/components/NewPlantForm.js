@@ -8,8 +8,6 @@ function NewPlantForm({ formData, setFormData, updatedArray }) {
     })
   }
 
-  console.log(formData)
-
   function formOnSubmit(event) {
     event.preventDefault();
 
@@ -26,8 +24,6 @@ function NewPlantForm({ formData, setFormData, updatedArray }) {
       "image": "",
       "price": "",
     })
-
-
   }
 
   
